@@ -2,6 +2,7 @@
   <div class="container">
     <!-- 3. and then using component here -->
     <Header title="Task Tracker" />
+    <Tasks @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 </template>
 
@@ -10,12 +11,46 @@
 <script>
 // 1. Importing component
 import Header from './components/Header'
+import Tasks from './components/Tasks'
 
 export default {
   name: 'App',
   components: {
     // 2. Registering the imported component
-    Header
+    Header,
+    Tasks
+  },
+  data() {
+    return {
+      tasks: []
+    }
+  },
+  methods: {
+    deleteTask(id) {
+      console.log('task', id)
+    }
+  },
+  created() {
+    this.tasks = [
+      {
+        id: 1,
+        text: 'Öva på VUE',
+        day: 'Varje dag innan/efter lunch',
+        reminder: true,
+      },
+      {
+        id: 2,
+        text: 'Öva på react',
+        day: 'Varje kväll innan/efter middag',
+        reminder: true,
+      },
+      {
+        id: 3,
+        text: 'Skriv om CV',
+        day: 'Någon dag innan jan slut',
+        reminder: false,
+      },
+    ]
   }
 }
 </script>
