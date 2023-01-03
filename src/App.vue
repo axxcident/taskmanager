@@ -1,8 +1,11 @@
 <template>
   <div class="container">
     <!-- 3. and then using component here -->
-    <Header title="Task Tracker" />
-    <Tasks @delete-task="deleteTask" v-bind:tasks="tasks" />
+    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" v-bind:showAddTask="showAddTask" />
+    <div v-show="showAddTask">
+      <AddTask @add-task="addTask" />
+    </div>
+    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 </template>
 
@@ -12,22 +15,38 @@
 // 1. Importing component
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask.vue'
 
 export default {
   name: 'App',
   components: {
     // 2. Registering the imported component
     Header,
-    Tasks
+    Tasks,
+    AddTask,
   },
   data() {
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false,
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask;
+    },
     deleteTask(id) {
-      console.log('task', id)
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => task.id === id ?
+        { ...task, reminder: !task.reminder } : task)
+    },
+    addTask(task) {
+      // this.tasks.push(newTask) detta m arg=newTask funkar också
+      this.tasks = [...this.tasks, task]
     }
   },
   created() {
