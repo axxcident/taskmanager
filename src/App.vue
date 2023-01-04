@@ -35,8 +35,19 @@ export default {
     toggleAddTask() {
       this.showAddTask = !this.showAddTask;
     },
-    deleteTask(id) {
+    async deleteTask(id) {
       if (confirm('Are you sure?')) {
+
+        const res = await fetch(`api/tasks/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify()
+        })
+
+        const data = res.json()
+
         this.tasks = this.tasks.filter((task) => task.id !== id)
       }
     },
@@ -44,9 +55,19 @@ export default {
       this.tasks = this.tasks.map((task) => task.id === id ?
         { ...task, reminder: !task.reminder } : task)
     },
-    addTask(task) {
+    async addTask(task) {
+      const res = await fetch('api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(task)
+      })
+
+      const data = await res.json()
+
       // this.tasks.push(newTask) detta m arg=newTask funkar också
-      this.tasks = [...this.tasks, task]
+      this.tasks = [...this.tasks, data]
     },
     async fetchTasks() {
       const res = await fetch("api/tasks");

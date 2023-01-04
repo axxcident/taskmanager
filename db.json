@@ -13,10 +13,10 @@
       "reminder": true
     },
     {
-      "id": 3,
-      "text": "Skriv om CV",
-      "day": "Någon dag innan jan slut",
-      "reminder": false
+      "text": "Kolla om funka. Nätet nere",
+      "day": "Varje dag",
+      "reminder": false,
+      "id": 3
     }
   ]
 }

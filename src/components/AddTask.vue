@@ -36,7 +36,7 @@ export default {
         return
       }
       const newTask = {
-        id: Math.floor(Math.random() * 1000),
+        // id: Math.floor(Math.random() * 1000), Ifall man ej använder Fake API Rest Json-server
         text: this.text,
         day: this.day,
         reminder: this.reminder
