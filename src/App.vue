@@ -47,30 +47,43 @@ export default {
     addTask(task) {
       // this.tasks.push(newTask) detta m arg=newTask funkar också
       this.tasks = [...this.tasks, task]
+    },
+    async fetchTasks() {
+      const res = await fetch("api/tasks");
+      const data = res.json();
+      return data;
+    },
+    async fetchTask(id) {
+      const res = await fetch(`api/tasks/${id}`);
+      const data = res.json();
+      return data;
     }
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Öva på VUE',
-        day: 'Varje dag innan/efter lunch',
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: 'Öva på react',
-        day: 'Varje kväll innan/efter middag',
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: 'Skriv om CV',
-        day: 'Någon dag innan jan slut',
-        reminder: false,
-      },
-    ]
-  }
+  async created() {
+    this.tasks = await this.fetchTasks()
+  },
+  //   created() {
+  //     this.tasks = [
+  //       {
+  //         id: 1,
+  //         text: 'Öva på VUE',
+  //         day: 'Varje dag innan/efter lunch',
+  //         reminder: true,
+  //       },
+  //       {
+  //         id: 2,
+  //         text: 'Öva på react',
+  //         day: 'Varje kväll innan/efter middag',
+  //         reminder: true,
+  //       },
+  //       {
+  //         id: 3,
+  //         text: 'Skriv om CV',
+  //         day: 'Någon dag innan jan slut',
+  //         reminder: false,
+  //       },
+  //     ]
+  //   }
 }
 </script>
 
