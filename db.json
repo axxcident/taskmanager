@@ -1,19 +1,13 @@
 {
   "tasks": [
     {
-      "id": 2,
-      "text": "Öva på react",
-      "day": "18:00 PM - 09:00  AM",
-      "reminder": false
-    },
-    {
       "text": "Ta bort tidigare inputs",
       "day": "Manana manana",
       "reminder": true,
       "id": 3
     },
     {
-      "text": "Promenad m Nina",
+      "text": "Promenad m Wendy",
       "day": "Monday 08:00",
       "reminder": false,
       "id": 4
